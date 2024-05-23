@@ -46,20 +46,20 @@ while true
             disp(['El resultado de la integral es ' num2str(int)]);
             
         case 2
-            f = input('Ingresa la funcion f(x): ', 's');
-            f = inline(f);
-            li = input('Ingrese el limite inferior de la integral: ');
-            ls = input('Ingrese el limite superior de la integral: ');
-            intd = int(f, li, ls);  % Utiliza 'integral' en lugar de 'int'
-            disp(['El resultado de la integral definida es ' num2str(intd)]);
+            syms x
+            funStr = input('Ingrese la función f(x): ', 's');
+            f = str2sym(funStr); 
+            a = input('Ingrese el límite inferior de la integral: ');
+            b = input('Ingrese el límite superior de la integral: ');
+            result = int(f, x, a, b);
+            disp(['El resultado de la integral definida es ', char(result), ' + c']);
             
         case 3
             syms x
-            f = input('Ingrese la funcion f(x): ', 's');
-            f = str2func(['@(x)', f]);  % Convierte la cadena a una función anónima
-            intg = int(f, x);
-            disp(['El resultado de la integral indefinida es ' char(intg)]);
-            
+            f = input('Ingrese la funcion f(x): ');
+            intg = int(f,x);
+            disp('El resultado de la integral indefinida es ');
+            pretty(intg)
         case 4
             syms x;
             f = input('ingrese la funcion: ');
@@ -67,7 +67,7 @@ while true
             b = input('ingrese el final del intervalo: ');
             n = input('ingrese la cantidad de subintervalos: ');
             dx = (b-a)/n;
-            resultado = zeros(1,n); %creacion de un vector
+            resultado = zeros(1,n);
             i = 0;
             fs = subs(f,x,(a+i*dx));
             fr = fs*dx;
